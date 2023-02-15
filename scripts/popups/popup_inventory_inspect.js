@@ -221,6 +221,11 @@ var InventoryInspect = ( function()
 
 	var _UpdateCharacterModelPanel = function( itemId )
 	{
+		if ( !ItemInfo.IsWeapon(itemId) )
+		{
+			return;
+		}
+		
 		var elActionBarPanel = $.GetContextPanel().FindChildInLayoutFile( 'PopUpInspectActionBar' );
 		InspectActionBar.OnUpdateCharModel( false,
 			elActionBarPanel.FindChildInLayoutFile( 'InspectDropdownCharModels' ),
@@ -328,7 +333,7 @@ var InventoryInspect = ( function()
 				if( nCoinRank === 1 && nSeasonAccess === acquiredItemSeasonAccess )
 				{
 					_ClosePopup();
-					$.DispatchEvent( 'HideStoreStatusPanel', '' );
+					$.DispatchEvent( 'HideStoreStatusPanel' );
 	
 					UiToolkitAPI.ShowCustomLayoutPopupParameters(
 						'',
@@ -350,14 +355,14 @@ var InventoryInspect = ( function()
 				                                                        
 				_ClosePopup();
 				$.DispatchEvent( 'ShowAcknowledgePopup', '', '' );
-				$.DispatchEvent( 'HideStoreStatusPanel', '' );
+				$.DispatchEvent( 'HideStoreStatusPanel');
 
 				return;
 			}
 
 			_ClosePopup();
 			$.DispatchEvent( 'ShowAcknowledgePopup', '', ItemId );
-			$.DispatchEvent( 'HideStoreStatusPanel', '' );
+			$.DispatchEvent( 'HideStoreStatusPanel' );
 		}
 	};
 
